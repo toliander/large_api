@@ -7,34 +7,27 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>476</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableView" name="Coffe_table">
+   <widget class="QLabel" name="kartinka">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>781</width>
-      <height>361</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="change_button">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>390</y>
-      <width>281</width>
-      <height>41</height>
+      <x>90</x>
+      <y>100</y>
+      <width>601</width>
+      <height>381</height>
      </rect>
     </property>
     <property name="text">
-     <string>Внести изменения</string>
+     <string>КАРТИНОМБЧКА</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
