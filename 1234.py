@@ -1,7 +1,7 @@
 import requests
 import sys
 from PyQt5 import uic, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QButtonGroup
 
 
 class ApiWindow(QMainWindow):
@@ -17,12 +17,30 @@ class ApiWindow(QMainWindow):
         # максимальный размер 650х450
         self.size = ('650', '450')
         self.scale = 0.002, 0.002
+        self.group = QButtonGroup(self)
+        self.group.addButton(self.radio1)
+        self.group.addButton(self.radio2)
+        self.group.addButton(self.radio3)
+        self.buttons = [self.radio2, self.radio1, self.radio3]
+        for button in self.buttons:
+            button.toggled.connect(self.onClicked)
+        self.radio1.setChecked(True)
+        self.map = 'map'
+        self.get_map()
+
+    def onClicked(self):
+        keys = ['satellite', 'map', 'hybrid']
+        for i in range(len(self.buttons)):
+            if self.buttons[i].isChecked():
+                self.map = keys[i]
+                break
         self.get_map()
 
     def get_map(self):
         request = f"http://static-maps.yandex.ru/1.x/?ll=" \
                   f"{','.join([str(x) for x in self.coords])}" \
-                  f"&size={','.join(self.size)}&spn={','.join([str(x) for x in self.scale])}&l=map"
+                  f"&size={','.join(self.size)}&spn={','.join([str(x) for x in self.scale])}&l={self.map}"
+        print(request)
         response = requests.get(request)
         if response.status_code == 200:
             with open('image.png', 'wb') as file:
