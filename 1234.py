@@ -24,6 +24,7 @@ class ApiWindow(QMainWindow):
         self.buttons = [self.radio2, self.radio1, self.radio3]
         for button in self.buttons:
             button.toggled.connect(self.onClicked)
+        self.buttons[0].setChecked(True)
         self.map = 'map'
         self.get_map()
 
