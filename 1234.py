@@ -24,12 +24,11 @@ class ApiWindow(QMainWindow):
         self.buttons = [self.radio2, self.radio1, self.radio3]
         for button in self.buttons:
             button.toggled.connect(self.onClicked)
-        self.radio1.setChecked(True)
         self.map = 'map'
         self.get_map()
 
     def onClicked(self):
-        keys = ['satellite', 'map', 'hybrid']
+        keys = ['sat', 'map', 'sat,skl']
         for i in range(len(self.buttons)):
             if self.buttons[i].isChecked():
                 self.map = keys[i]
@@ -40,7 +39,6 @@ class ApiWindow(QMainWindow):
         request = f"http://static-maps.yandex.ru/1.x/?ll=" \
                   f"{','.join([str(x) for x in self.coords])}" \
                   f"&size={','.join(self.size)}&spn={','.join([str(x) for x in self.scale])}&l={self.map}"
-        print(request)
         response = requests.get(request)
         if response.status_code == 200:
             with open('image.png', 'wb') as file:
